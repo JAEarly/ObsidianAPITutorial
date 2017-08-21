@@ -14,7 +14,9 @@ public class ClientProxy extends CommonProxy {
 
 	public void registerRendering()
 	{
-		RenderSaiga saigaRenderer = new RenderSaiga(FileLoader.loadModelFromResources("saiga", saigaModel, saigaTexture, ModelSaiga.class));
+		ModelSaiga modelSaiga = FileLoader.loadModelFromResources("saiga", saigaModel, saigaTexture, ModelSaiga.class);
+		modelSaiga.setModelScale(0.8F);
+		RenderSaiga saigaRenderer = new RenderSaiga(modelSaiga);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySaiga.class, saigaRenderer);
 	}
 	
