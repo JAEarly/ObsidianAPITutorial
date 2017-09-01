@@ -35,14 +35,14 @@ public class CommonProxy {
 			return true;
 		};
 		
-		IsActiveFunction isSaigaEating = (entity) -> {
+		IsActiveFunction isSaigaCalling = (entity) -> {
 			return entity instanceof EntitySaiga ? ((EntitySaiga) entity).isCalling() : false;
 		};
 		
 		AnimationRegistry.registerEntity(EntitySaiga.class, "saiga");
 		AnimationRegistry.registerAnimation("saiga", "walk", saigaWalk, 0, true, isWalking);
 		AnimationRegistry.registerAnimation("saiga", EntityAIEat.name, new AIAnimationWrapper(EntityAIEat.name, saigaEat, 10, true));
-		AnimationRegistry.registerAnimation("saiga", "call", saigaCall, 40, false, isSaigaEating);
+		AnimationRegistry.registerAnimation("saiga", "call", saigaCall, 40, false, isSaigaCalling);
 		AnimationRegistry.registerAnimation("saiga", "idle", saigaIdle, 50, true, returnTrue);
 
 		
