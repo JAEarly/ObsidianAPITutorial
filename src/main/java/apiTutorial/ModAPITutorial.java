@@ -5,6 +5,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
+import obsidianAPI.ObsidianAPI;
 import obsidianAPI.ObsidianEventHandler;
 import obsidianAPI.network.AnimationNetworkHandler;
 
@@ -29,6 +30,7 @@ public class ModAPITutorial {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new ObsidianEventHandler());
+		ObsidianAPI.EVENT_BUS.register(new AnimationEventHandler());
 	}
 	
 }

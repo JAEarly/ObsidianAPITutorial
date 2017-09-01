@@ -12,6 +12,8 @@ public class CommonProxy {
 
 	private ResourceLocation saigaWalk = new ResourceLocation("mod_api_tutorial:animations/Walk.oba");
 	private ResourceLocation saigaIdle = new ResourceLocation("mod_api_tutorial:animations/SaigaIdle.oba");
+	private ResourceLocation saigaEat = new ResourceLocation("mod_api_tutorial:animations/SaigaEat.oba");
+	private ResourceLocation saigaCall = new ResourceLocation("mod_api_tutorial:animations/SaigaCall.oba");
 	
 	public void init() 
 	{	
@@ -33,12 +35,16 @@ public class CommonProxy {
 			return true;
 		};
 		
+		IsActiveFunction isSaigaEating = (entity) -> {
+			return entity instanceof EntitySaiga ? ((EntitySaiga) entity).isCalling() : false;
+		};
+		
 		AnimationRegistry.registerEntity(EntitySaiga.class, "saiga");
 		AnimationRegistry.registerAnimation("saiga", "walk", saigaWalk, 0, true, isWalking);
+		AnimationRegistry.registerAnimation("saiga", EntityAIEat.name, new AIAnimationWrapper(EntityAIEat.name, saigaEat, 10, true));
+		AnimationRegistry.registerAnimation("saiga", "call", saigaCall, 40, false, isSaigaEating);
 		AnimationRegistry.registerAnimation("saiga", "idle", saigaIdle, 50, true, returnTrue);
-		
-		AIAnimationWrapper eatWrapper = new AIAnimationWrapper(EntityAIEat.name, new ResourceLocation("mod_api_tutorial:animations/SaigaEat.oba"), 10, true);
-		AnimationRegistry.registerAnimation("saiga", EntityAIEat.name, eatWrapper);
+
 		
 	}
 	
